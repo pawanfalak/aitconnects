@@ -3,5 +3,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"python.pythonPath": "C:\\Users\\hp\\.virtualenvs\\aitconnects-6zd_cYnH\\Scripts\\python.exe"
+	}
 }
