@@ -2,4 +2,43 @@
 
 {% block content %}
 Welcome to aitconnects  
+
+<div id="tweets"> 
+    Loading....
+</div>
+
+<script>
+    const tweetElement= document.getElementById("tweets")
+
+    const xhr= new XMLHttpRequest()
+    const method= "GET"
+    const url= "/tweets"
+    const responseType="json"
+    function formatTweetElement(tweet){
+        var formattedTweet= "<div class='mb-4 tweet' id='tweet-"+ tweet.id 
+        +"'>"+"<p>"+tweet.content+
+        
+        "</p></div>"
+        return formattedTweet
+    }
+    xhr.responseType= responseType
+    xhr.open(method,url)
+    xhr.onload = function() {
+        const serverResponse =xhr.response
+        //console.log(serverResponse)
+        const listedItems = serverResponse.response
+        var finalTweetStr= ""
+        var i;
+        for (i=0;i<listedItems.length;i++){
+            var tweetObject=listedItems[i] 
+            var currentItem=formatTweetElement(tweetObject)
+            finalTweetStr+=currentItem
+        }
+        tweetElement.innerHTML=finalTweetStr
+    }   
+    xhr.send() 
+</script>
+
 {% endblock content %}
+
+
