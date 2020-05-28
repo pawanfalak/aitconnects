@@ -4,6 +4,7 @@
         -image
     -delete
     -retweet
+    -likes
 2. Users
     -register
     -login
