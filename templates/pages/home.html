@@ -78,6 +78,9 @@
             }else if(xhr.status===401){
                 alert("Please Login!")
                 window.location.href = "/login"
+            }else if(xhr.status===403){
+                alert("Please Login!")
+                window.location.href = "/login"
             }else if(xhr.status===500){
                 alert("Server Error!! please try again...")
             }
@@ -106,7 +109,7 @@
         xhr.onload = function() {
             const serverResponse =xhr.response
             //console.log(serverResponse)
-            const listedItems = serverResponse.response
+            const listedItems = serverResponse
             var finalTweetStr= ""
             var i;
             for (i=0;i<listedItems.length;i++){
