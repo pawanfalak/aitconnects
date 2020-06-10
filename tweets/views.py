@@ -10,7 +10,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .forms import TweetForm
 from .models import Tweets
-from .serializer import TweetSerializer, TweetActionSerializer
+from .serializer import (
+        TweetSerializer, 
+        TweetActionSerializer,
+        TweetCreateSerializer)
 
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
@@ -23,7 +26,7 @@ def home_view(request, *args, **kwargs):
 @api_view(['POST']) #to specify http method by client is POST only 
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetSerializer(data=request.POST)
+    serializer = TweetCreateSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data,status=201)
@@ -69,6 +72,7 @@ def tweet_action_view(request, *args, **kwargs):
         data=serializer.validated_data
         tweet_id=data.get("id")
         action =data.get("action")
+        content =data.get("content")
 
         qs= Tweets.objects.filter(id=tweet_id)
         if not qs.exists():
@@ -82,7 +86,12 @@ def tweet_action_view(request, *args, **kwargs):
             obj.likes.remove(request.user)
         elif action == "retweet":
             #todo
-            pass
+            new_tweet = Tweets.objects.create(
+                    user=request.user, 
+                    parent=obj,
+                    content=content,)
+            serializer= TweetSerializer(new_tweet)
+            return Response(serializer.data, status=200)
     return Response({}, status=200)
 
 def tweet_create_view_pure_django(request, *args, **kwargs):

@@ -4,6 +4,8 @@
         -image
     -delete
     -retweet
+        --create only serializer
+        --read only serializer
     -likes
 2. Users
     -register
