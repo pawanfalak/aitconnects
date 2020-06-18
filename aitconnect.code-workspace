@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"python.pythonPath": "C:\\Users\\hp\\.virtualenvs\\aitconnects-6zd_cYnH\\Scripts\\python.exe"
+		"python.pythonPath": "C:\\Users\\hp\\.virtualenvs\\aitconnects-6zd_cYnH\\Scripts\\python.exe",
+		"git.ignoreLimitWarning": true
 	}
 }
