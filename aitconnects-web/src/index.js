@@ -15,13 +15,9 @@ if(appEl){
     );
   }
 const tweetEl=document.getElementById('aitconnects-web')
+const e =React.createElement
 if(tweetEl){
-    ReactDOM.render(
-      <React.StrictMode>
-        <TweetComponents />
-      </React.StrictMode>,
-      tweetEl
-    );
+    ReactDOM.render(e(TweetComponents,tweetEl.dataset),tweetEl);
   }
 
 // If you want your app to work offline and load faster, you can change
